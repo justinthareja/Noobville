@@ -1,0 +1,42 @@
+a {
+	text-decoration: none;
+	color: #fff;
+}
+#wrapper {
+	background: orange;
+	max-width: 940px;
+	padding: 0 5%;
+	margin: 0 auto;
+}
+li {
+	max-width: 940px;
+}
+#moss {
+	max-width: 940px;
+	margin: auto;
+	padding: 0 5%;
+}
+#logo {
+	background-color: green;
+	margin: 0;
+	text-align: center;
+	max-width: 100%;
+}
+header {
+	background-color:#1F7A7A
+}
+nav {
+	background-color:#2F8C9D;
+	text-align: center;
+}
+nav li {
+	display: inline-block;
+	padding: 20px;
+}
+#grid {
+	display: table;
+}
+
+section li {
+	display: inline-block;
+}
