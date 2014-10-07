@@ -16,27 +16,45 @@ li {
 	margin: auto;
 	padding: 0 5%;
 }
-#logo {
-	background-color: green;
-	margin: 0;
+h1, h2 {
+	color: #fff;
+	font-family: 'Raleway', sans-serif;
+	margin: 0 auto;
 	text-align: center;
 	max-width: 100%;
+	height: 50px;
+	padding: 0;
 }
+
 header {
-	background-color:#1F7A7A
+	background-color:#1F7A7A;
+	text-align: center;
 }
 nav {
 	background-color:#2F8C9D;
-	text-align: center;
+	font-family: 'Raleway', sans-serif;
+	font-size: 1.75em;
+
 }
 nav li {
 	display: inline-block;
 	padding: 20px;
 }
-#grid {
-	display: table;
-}
 
 section li {
 	display: inline-block;
+}
+nav a:hover{
+	color:#456734;
+}
+#pineapple {
+	float: left;
+}
+nav a.selected {
+	color:blue;
+}
+
+p {
+	font-weight: bolder;
+	line-height: .2em;
 }
