@@ -1,6 +1,21 @@
+img {
+	max-width: 100%;
+}
+
+#gallery {
+	list-style: none;
+}
+#gallery li {
+	float: left;
+	width: 45%;
+	margin: 2.5%;
+}
+#gallery p {
+	text-align: center;
+	font-size: 40px;
+}
 a {
 	text-decoration: none;
-	color: #fff;
 }
 #wrapper {
 	background: orange;
@@ -11,11 +26,7 @@ a {
 li {
 	max-width: 940px;
 }
-#moss {
-	max-width: 940px;
-	margin: auto;
-	padding: 0 5%;
-}
+
 h1, h2 {
 	color: #fff;
 	font-family: 'Raleway', sans-serif;
@@ -34,16 +45,19 @@ nav {
 	background-color:#2F8C9D;
 	font-family: 'Raleway', sans-serif;
 	font-size: 1.75em;
+}
 
+nav a {
+	color: #fff;
 }
 nav li {
 	display: inline-block;
 	padding: 20px;
-}
+} 
 
-section li {
+/* section li {
 	display: inline-block;
-}
+} */
 nav a:hover{
 	color:#456734;
 }
@@ -57,4 +71,11 @@ nav a.selected {
 p {
 	font-weight: bolder;
 	line-height: .2em;
+}
+
+.social-icon {
+	margin: 0;
+	padding: 5px;
+	height: 20px;
+	width: 20px;
 }
