@@ -1,3 +1,5 @@
+prompt("What's your name?",name)
+
 console.log("hello from flaky.js");
 
 var a = 2;
@@ -8,4 +10,5 @@ if (a<b) {
 } else {
 	console.log("else block")
 };
+
 
