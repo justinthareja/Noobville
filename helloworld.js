@@ -134,7 +134,42 @@ sayHello();
 
 
 
-***********************************************************************
+/***********************************************************************
+INTRODUCTION TO ARRAYS/OBJECTS
+************************************************************************
+
+var friends = ["Luke", "Scott", "Dan", "Stape", [8 , true, null]]; //can capture different types of elements within the same array (even other arrays)
+console.log(friends);
+console.log(friends.length); //length calculates total number of values in the array
+console.log(friends[0]); // returns "Luke", always start counting from 0
+console.log(friends[10]); //returns "undefined"
+
+var friendNumber = 1;
+console.log(friends[friendNumber]); //returns "Scott"
+
+for(var i = 0; i < friends.length; i++) { //index in loop is always going to be less than length
+	console.log(friends[i]);
+}
+
+
+var me = {
+	first_name: "Justin", //first_name = property "Justin" = key
+	last_name: "Thareja",
+	"Employee Number": 1 
+}
+
+console["log"](me);
+console.log(me.first_name);
+console.log(me["last_name"]); //square brackets known as "subscript"
+console.log(me["Employee Number"]);
+
+me.first_name = "Dan" //can change values/keys outside the object literal
+
+var key = "first_name"
+console.log(me[key]) //dynamic retreival using a variable 
+*/
+
+/***********************************************************************
 ---------------------EASY MODE-----------------------------------------
 (1) Write the function printTo100 that prints out the numbers 1 to 100 
 
@@ -149,12 +184,11 @@ Hint: There's a handy operator that will help you with these functions.
 ************************************************************************/
 
 var printList = function() {
-	for (var i = 1; i <= 100; i++)
+	for (var i = 1; i <= 100; i++) {
 		console.log(i); //prints the value of i from 1-100 to the console
 	}	
-
-
-var isEven = function (num) {
+}
+var isEven = function(num) {
 	if (num % 2 == 0) { 
 		return true; //checks the remainder of the argument divided by 2. if the remainder is 0. isEven returns a true boolean 
 	} 
@@ -162,8 +196,7 @@ var isEven = function (num) {
 		return false; //if the remainder is not 0. isEven returns a false boolean 
 	}
 }
-
-var isOdd = function (num) {
+var isOdd = function(num) {
 	if (num % 2 !== 0) { 
 		return true; //checks the remainder of the argument divided by 2. if the remainder is not 0, isOdd returns a true boolean
 	} 
@@ -212,17 +245,88 @@ var promptOddEven = function() {
 	
 	return oddNum + evenNum; //returns the sum of oddNum and evenNum defined by the prompts earlier.
 }
+
+
+
+/***********************************************************************
+-------------------HARD MODE------------------------------------------
+Write the function rockPaperScissors. 
+
+The function will take a string as it's only argument, 
+either 'rock', 'paper', or 'scissors'. 
+
+Inside the function there will be a computer's hand that is a randomly 
+generated string either 'rock', 'paper', 'scissors'. 
+
+Compare the user's hand with the computers and console.log the results.
+************************************************************************/
+
+var outcomes = ["Rock", "Paper", "Scissors"]; //define an array of outcomes
+
+var winningHand = function(userHand,computerHand) {
+	console.log("your hand is " + userHand);
+	console.log("computer's hand is " + computerHand);
+
+	if (userHand == outcomes[0]) { 
+		if (computerHand == outcomes[0]) {
+			console.log("Throw Again");
+		} 
+		else if (computerHand == outcomes[1]) {
+			console.log("You Lose");
+		}
+		else {
+			console.log("You Win");
+		}
+	}
+	if (userHand == outcomes[1]) {
+		if (computerHand == outcomes[1]) {
+			console.log("Throw Again");
+		} 
+		else if (computerHand == outcomes[2]) {
+			console.log("You Lose");
+		}
+		else {
+			console.log("You win");
+		}
+	}
+	if (userHand == outcomes[2]) {
+		if (computerHand == outcomes[2]) {
+			console.log("Throw Again");
+		} 
+		else if (computerHand == outcomes[0]) {
+			console.log("You Lose");
+		}
+		else {
+			console.log("You Win");
+		}
+	}	
+}
+
+
+
+var inputCheck = function(x) {
+	if (x == outcomes[0] || x == outcomes[1] || x == outcomes[2]) {
+		return false;
+	}
+	else {
+		return true;
+	} 
+}
+
+
+var rockPaperScissors = function() {
+	var userHand = window.prompt("Rock, Paper or Scissors?", "Paper"); //prompt for user's hand
+	var computerHand = outcomes[Math.round(Math.random() * (outcomes.length - 1))]; 
+	//outcomes.length - 1 determines the highest valid integer for a returning value in the array 
+	//Math.random() * (outcomes.length - 1) will return a random number between [0,2] 
+	//Applying Math.round() to that random number will then round it to an integer, which represents either "Rock", "Paper", or "Scissors"
 	
+	while(inputCheck(userHand)){
+		var userHand = window.prompt("Please enter only Rock, Paper or Scissors", "Rock"); //re-prompt for user's hand until "Rock", "Paper" or "Scissors" is entered
+	}
 
-
-
-
-
-
-
-
-
-
+	winningHand(userHand,computerHand);
+}
 
 
 
