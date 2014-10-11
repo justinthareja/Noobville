@@ -76,7 +76,6 @@ for (var counter=100; counter >= 1; counter--) {
 	else {
 	    console.log(number);
 	}
-}
 
 
 
@@ -188,6 +187,7 @@ var printList = function() {
 		console.log(i); //prints the value of i from 1-100 to the console
 	}	
 }
+
 var isEven = function(num) {
 	if (num % 2 == 0) { 
 		return true; //checks the remainder of the argument divided by 2. if the remainder is 0. isEven returns a true boolean 
@@ -196,6 +196,7 @@ var isEven = function(num) {
 		return false; //if the remainder is not 0. isEven returns a false boolean 
 	}
 }
+
 var isOdd = function(num) {
 	if (num % 2 !== 0) { 
 		return true; //checks the remainder of the argument divided by 2. if the remainder is not 0, isOdd returns a true boolean
@@ -261,76 +262,80 @@ generated string either 'rock', 'paper', 'scissors'.
 Compare the user's hand with the computers and console.log the results.
 ************************************************************************/
 
-var outcomes = ["Rock", "Paper", "Scissors"]; //define an array of outcomes
+var outcomes = ["Rock", "Paper", "Scissors"]; //define an array of all outcomes that can get thrown
 
-var winningHand = function(userHand,computerHand) {
+var objects = { //converts the array values into an object called "objects"
+	Rock: outcomes[0], //"Rock" can now be called by objects.Rock OR objects[Rock]
+	Paper: outcomes[1], //"Paper" can now be called by objects.Paper OR objects[Paper]
+	Scissors: outcomes[2] //"Scissors" can now be called by objects.Scissors OR objects[Rock]
+};
+
+var responses = { //condense responses into an object to not repeat
+	WIN: 'You Win', //responses.WIN = the string 'You Win'
+	LOSE: 'You Lose', //responses.LOSE = the string 'You Win'
+	TIE: 'Throw Again' //responses.LOSE = the string 'You Win'
+}
+
+var reply = function(outcome){ 
+	if(typeof outcome !== 'string'){ //check to make sure the data coming into a function is a string as you expect
+		console.log('output error'); //output error
+	} else{
+		console.log(outcome); //outputs outcome to the log 
+	}
+}
+
+
+var calculateWinningHand = function(userHand,computerHand) {
+
 	console.log("your hand is " + userHand);
 	console.log("computer's hand is " + computerHand);
-
-	if (userHand == outcomes[0]) { 
-		if (computerHand == outcomes[0]) {
-			console.log("Throw Again");
-		} 
-		else if (computerHand == outcomes[1]) {
-			console.log("You Lose");
+	
+	if(userHand === computerHand){ //check for tie first
+		reply(responses.TIE); //output 'Throw Again' to console.log
+	}
+	else if (userHand === objects.Rock) { //check that the user has rock
+		if (computerHand === objects.Paper) { //check that the computer has paper
+			reply(responses.LOSE); //paper beats rock, user loses
 		}
 		else {
-			console.log("You Win");
+			reply(responses.WIN); //rock beats scissors, user wins
 		}
 	}
-	if (userHand == outcomes[1]) {
-		if (computerHand == outcomes[1]) {
-			console.log("Throw Again");
-		} 
-		else if (computerHand == outcomes[2]) {
-			console.log("You Lose");
+	else if (userHand === objects.Paper) { //check that the user has paper
+		if (computerHand === objects.Scissors) { //check that the computer has rock
+			reply(responses.LOSE); //scissors beats paper, user loses 
 		}
 		else {
-			console.log("You win");
+			reply(responses.WIN); //paper beats rock, user wins
 		}
 	}
-	if (userHand == outcomes[2]) {
-		if (computerHand == outcomes[2]) {
-			console.log("Throw Again");
-		} 
-		else if (computerHand == outcomes[0]) {
-			console.log("You Lose");
+	else if (userHand === objects.Scissors) { //check that the user has scissors
+		if (computerHand === objects.Rock) { //check that the computer has rock
+			reply(responses.LOSE); //rock beats scissors, user loses
 		}
 		else {
-			console.log("You Win");
+			reply(responses.WIN); //scissors beats paper, user wins
 		}
 	}	
-}
-
-
-
-var inputCheck = function(x) {
-	if (x == outcomes[0] || x == outcomes[1] || x == outcomes[2]) {
-		return false;
+	else{
+		console.log('Invalid input -- Please choose either Rock, Paper or Scissors'); //the value entered does not match any value in the outcomes array
+		rockPaperScissors();
 	}
-	else {
-		return true;
-	} 
 }
 
-
-var rockPaperScissors = function() {
-	var userHand = window.prompt("Rock, Paper or Scissors?", "Paper"); //prompt for user's hand
-	var computerHand = outcomes[Math.round(Math.random() * (outcomes.length - 1))]; 
-	//outcomes.length - 1 determines the highest valid integer for a returning value in the array 
+function generateComputerHand(){
+	var randomIndex = Math.round(Math.random() * (outcomes.length - 1));
 	//Math.random() * (outcomes.length - 1) will return a random number between [0,2] 
 	//Applying Math.round() to that random number will then round it to an integer, which represents either "Rock", "Paper", or "Scissors"
-	
-	while(inputCheck(userHand)){
-		var userHand = window.prompt("Please enter only Rock, Paper or Scissors", "Rock"); //re-prompt for user's hand until "Rock", "Paper" or "Scissors" is entered
-	}
-
-	winningHand(userHand,computerHand);
+	return outcomes[randomIndex];
 }
 
+var rockPaperScissors = function() {
+	var computerHand = generateComputerHand(); //defines computer's hand
+	var userHand = window.prompt("Rock, Paper or Scissors?", "Paper"); //prompt for user's hand
 
-
-
+	calculateWinningHand(userHand,computerHand); 
+}
 
 
 
