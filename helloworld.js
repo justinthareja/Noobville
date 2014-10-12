@@ -267,13 +267,13 @@ var outcomes = ["Rock", "Paper", "Scissors"]; //define an array of all outcomes 
 var objects = { //converts the array values into an object called "objects" to more easily identify outcomes
 	Rock: outcomes[0], //"Rock" can now be called by objects.Rock OR objects[Rock]
 	Paper: outcomes[1], //"Paper" can now be called by objects.Paper OR objects[Paper]
-	Scissors: outcomes[2] //"Scissors" can now be called by objects.Scissors OR objects[Rock]
+	Scissors: outcomes[2] //"Scissors" can now be called by objects.Scissors OR objects[Scissors]
 };
 
 var responses = { //condense responses into an object to not repeat
 	WIN: 'You Win', //responses.WIN = the string 'You Win'
-	LOSE: 'You Lose', //responses.LOSE = the string 'You Win'
-	TIE: 'Throw Again' //responses.LOSE = the string 'You Win'
+	LOSE: 'You Lose', //responses.LOSE = the string 'You Lose'
+	TIE: 'Throw Again' //responses.TIE = the string 'Throw Again'
 }
 
 var reply = function(outcome){ 
