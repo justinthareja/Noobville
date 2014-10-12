@@ -264,7 +264,7 @@ Compare the user's hand with the computers and console.log the results.
 
 var outcomes = ["Rock", "Paper", "Scissors"]; //define an array of all outcomes that can get thrown
 
-var objects = { //converts the array values into an object called "objects"
+var objects = { //converts the array values into an object called "objects" to more easily identify outcomes
 	Rock: outcomes[0], //"Rock" can now be called by objects.Rock OR objects[Rock]
 	Paper: outcomes[1], //"Paper" can now be called by objects.Paper OR objects[Paper]
 	Scissors: outcomes[2] //"Scissors" can now be called by objects.Scissors OR objects[Rock]
@@ -336,9 +336,6 @@ var rockPaperScissors = function() {
 
 	calculateWinningHand(userHand,computerHand); 
 }
-
-
-
 
 
 
