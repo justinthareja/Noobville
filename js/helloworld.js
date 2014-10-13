@@ -96,6 +96,17 @@ for (var i = 100; i; i--) {
 	}
 }
 
+//optimal solution:
+
+for (var n = 1; n <= 100; n++) {
+  var output = "";
+  if (n % 3 == 0)
+    output += "Fizz";
+  if (n % 5 == 0)
+    output += "Buzz";
+  console.log(output || n);
+}
+
 
 
 ***********************************************************************
@@ -323,6 +334,7 @@ var calculateWinningHand = function(userHand,computerHand) {
 	}
 }
 
+
 function generateComputerHand(){
 	var randomIndex = Math.round(Math.random() * (outcomes.length - 1));
 	//Math.random() * (outcomes.length - 1) will return a random number between [0,2] 
@@ -336,6 +348,43 @@ var rockPaperScissors = function() {
 
 	calculateWinningHand(userHand,computerHand); 
 }
+
+/************************************************************************
+EJS LOOP PRACTICE 
+************************************************************************/
+var symbolPyramid = function(symbol) {
+	
+//	do {
+//		var output = prompt("Enter a single character", "#");
+//	} while (output.length != 1);
+//	output = symbol;
+//
+//	for(i = 0; i < 8; i++) {
+//		console.log(output);
+//		output +=  symbol;
+//	}
+
+for(line = symbol; line.length < 8; line += symbol)
+	console.log(line);
+}
+
+
+var chessBoard = function(size){
+	var linePrint = "";	
+	for(height = 1; height <= size; height++){
+		for (width = 1; width <= size; width++){
+			if((width + height) % 2 === 0)
+				linePrint += "#";
+			else
+				linePrint += (" ");
+		}
+	linePrint += "\n"
+	}
+console.log(linePrint);	
+}
+
+
+
 
 
 

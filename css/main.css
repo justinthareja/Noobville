@@ -1,0 +1,69 @@
+/************************************************************************
+HEADER
+************************************************************************/
+
+#header {
+    margin: auto;
+    padding: 1px;
+    text-align: center;
+    max-width: 100%
+}
+
+
+
+/************************************************************************
+BODY
+************************************************************************/
+
+.the_body {
+	padding: 1px;
+}
+
+
+
+/************************************************************************
+FOOTER
+************************************************************************/
+
+#footer {
+    margin: auto;
+    padding: 10px;
+    text-align: center;
+    max-width: 100%
+
+}
+
+#footer a {
+    text-decoration: none;
+    padding: 10px;
+}
+
+
+
+/************************************************************************
+COLORS
+************************************************************************/
+
+#header {
+    background-color: darkgoldenrod;
+    color: burlywood;
+}
+
+.the_body {
+    background-color: burlywood;
+    color: lightyellow;   
+}
+
+#footer {
+    background-color: darkgoldenrod;
+    color: burlywood;  
+}
+
+a {
+    color: burlywood;
+
+}
+
+a:hover {
+    color: white;
+}
