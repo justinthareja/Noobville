@@ -191,7 +191,7 @@ isEven will return true if the number is even, false otherwise.
 isOdd will return true if the number is odd, false otherwise. 
 
 Hint: There's a handy operator that will help you with these functions.
-************************************************************************/
+************************************************************************
 
 var printList = function() {
 	for (var i = 1; i <= 100; i++) {
@@ -232,7 +232,7 @@ until they enter an even number.
 After both numbers have been entered, return the sum. 
 
 Try to reuse isOdd and isEven here
-************************************************************************/
+************************************************************************
 
 var promptOddEven = function() {
 	var oddNum = parseInt(window.prompt("Enter an odd number", 0)); //prompt by default returns a string. parseInt parses the string into an integer to sum later.
@@ -271,7 +271,7 @@ Inside the function there will be a computer's hand that is a randomly
 generated string either 'rock', 'paper', 'scissors'. 
 
 Compare the user's hand with the computers and console.log the results.
-************************************************************************/
+************************************************************************
 
 var outcomes = ["Rock", "Paper", "Scissors"]; //define an array of all outcomes that can get thrown
 
@@ -351,7 +351,7 @@ var rockPaperScissors = function() {
 
 /************************************************************************
 EJS LOOP PRACTICE 
-************************************************************************/
+************************************************************************
 var symbolPyramid = function(symbol) {
 	
 //	do {
@@ -382,6 +382,71 @@ var chessBoard = function(size){
 	}
 console.log(linePrint);	
 }
+
+/************************************************************************
+EJS FUNCTION PRACTICE 
+************************************************************************
+
+
+var min = function(num1,num2) {
+	if(num1 < num2)
+		return num1;
+	else
+		return num2;
+}
+
+
+
+var isEven = function(x) {
+	if(x == 0) 
+		return true;
+	else if(x == 1) 
+		return false;		
+	else if(x > 0) 
+		return isEven(x - 2);	//intro to recursion
+	else 
+		return isEven(x + 2);
+			
+}
+
+
+var countChar = function(string,targetChar) { 
+	var count = 0
+
+	for(i = 0; i < string.length; i++) {
+		if(string.charAt(i) == targetChar)
+			count ++;
+	}
+	return count;	
+}
+
+
+var countBs = function(string) {
+	return countChar(string,"B");	
+}
+
+
+
+/************************************************************************
+TREEHOUSE JS VARIABLE REVIEW 
+
+scope: javascript only has function scope and NOT block scope
+shadowing: a local variable initialized within a function can have the same name and yet will not effect the global value
+		   an undeclared variable assigned a value within a function is created as a global variable
+hoisting: var declarations get hoisted to the top of the function when declared within the function scope
+          functions defined with declaration notation get hoisted to the top of their scope as well.
+************************************************************************/
+
+
+
+/************************************************************************
+TREEHOUSE ARRAY REVIEW
+************************************************************************/
+
+//index always starts with 0
+//other notation: var myArray = new array(array.length);
+//should primarily use object literal: myArray = [];
+
 
 
 
