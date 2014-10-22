@@ -506,6 +506,27 @@ var multiplyThis = function(matrix, multiplier) {
 }
 
 
+/************************************************************************
+EJS CH. 4 
+************************************************************************
+WTF are methods? 
+Properties that contain functions are generally called methods of the value they belong to. 
+
+var doh = "Doh";
+console.log(typeof doh.toUpperCase);
+
+console.log(doh.toUpperCase());
+var mack = [];
+mack.push("Mack");
+mack.push("the", "Knife");
+console.log(mack);
+
+console.log(mack.join(" "));
+
+console.log(mack.pop());
+
+console.log(mack);
+
 
 
 
