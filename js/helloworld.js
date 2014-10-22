@@ -441,11 +441,78 @@ hoisting: var declarations get hoisted to the top of the function when declared 
 
 /************************************************************************
 TREEHOUSE ARRAY REVIEW
-************************************************************************/
+*************************************************************************
 
 //index always starts with 0
 //other notation: var myArray = new array(array.length);
 //should primarily use object literal: myArray = [];
+
+//Some handy Methods:
+
+myArray = [1,2,3,4,5,6];
+console.log(myArray.toString());
+
+myArray.pop(); //removes and returns a value off the end of the array 
+console.log(myArray.toString());
+
+myArray.push(7);//adds the value '7' to the right hand of the array
+console.log(myArray.toString());
+
+myArray.shift();//shift is similar to pop but for the beginning of the array
+console.log(myArray.toString());
+
+myArray.unshift(0);//Unshift is similar to pUsh but for the beginning of the array (u's ride together and die together)
+console.log(myArray.toString());
+
+ 
+
+myArray = [1, 12, 100, 23, 2, 35, 336, 3339, 8];
+// myArray.reverse(); // reverses the elements within the array 
+
+myArray.sort(function(a,b){ //by default, the .sort will assume all values are strings. 
+	return a - b; //for any other comparison, an anon function must be written that returns a value with the following criteria when evaluating the elements within the array:
+});				  //if the value is positive, a is placed before b 
+				  //if the value is negative, a is placed after b
+				  //if the value is 0, a and b are treated as the same
+
+console.log(myArray.toString());
+
+*/
+
+/************************************************************************
+Homework:
+
+1) Write a function that takes a matrix (2D array) as it's only 
+argument and returns a new 2D array that multiplies each number in 
+the matrix by two. After this, extend the function to allow any 
+multiplier to be passed in as the second argument to the function.
+*************************************************************************/
+
+var matrix = [
+ [1,2,3],
+ [4,5,6],
+ [7,8,9]
+];
+
+
+var multiplyThis = function(matrix, multiplier) {
+	for (var i = matrix.length - 1; i >= 0; i--) {
+		for (var j = matrix.length - 1; j >= 0; j--) {
+			matrix[i][j] *= multiplier;
+		};
+	};
+
+	return matrix;
+}
+
+
+
+
+
+
+
+
+
 
 
 
