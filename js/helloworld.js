@@ -483,6 +483,14 @@ myArray = [0, 1, 2, 3, 4, 5, 6];
 myArray.splice(2, 0, 'two');
 //splice formatting: myArray.splice(index, removes x number of values, inserted at index) 
 
+var arrayEmpty = [];
+var arrayContents = ["A", "B", "C", "D", "E"];
+
+for (var i = 0; i < 5; i++)
+	arrayEmpty.push(arrayContents[i]);
+
+var myString = arrayEmpty.join("");
+
 */
 
 /************************************************************************
@@ -576,13 +584,7 @@ var coggers = {
 
 
 
-var arrayEmpty = [];
-var arrayContents = ["A", "B", "C", "D", "E"];
 
-for (var i = 0; i < 5; i++)
-	arrayEmpty.push(arrayContents[i]);
-
-var myString = arrayEmpty.join("");
 
 
 
