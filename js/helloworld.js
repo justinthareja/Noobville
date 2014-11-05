@@ -477,6 +477,12 @@ myArray.sort(function(a,b){ //by default, the .sort will assume all values are s
 
 console.log(myArray.toString());
 
+
+myArray = [0, 1, 2, 3, 4, 5, 6];
+
+myArray.splice(2, 0, 'two');
+//splice formatting: myArray.splice(index, removes x number of values, inserted at index) 
+
 */
 
 /************************************************************************
@@ -486,7 +492,7 @@ Homework:
 argument and returns a new 2D array that multiplies each number in 
 the matrix by two. After this, extend the function to allow any 
 multiplier to be passed in as the second argument to the function.
-*************************************************************************/
+**************************************************************************
 
 var matrix = [
  [1,2,3],
@@ -505,33 +511,78 @@ var multiplyThis = function(matrix, multiplier) {
 	return matrix;
 }
 
-
 /************************************************************************
-EJS CH. 4 
-************************************************************************/
-//WTF are methods? 
-//Properties that contain functions are generally called methods of the value they belong to. 
+Treehouse Objects + Methods Review
+*************************************************************************/
 
-var doh = "Doh";
-console.log(typeof doh.toUpperCase);
-
-console.log(doh.toUpperCase());
-var mack = [];
-mack.push("Mack");
-mack.push("the", "Knife");
-console.log(mack);
-
-console.log(mack.join(" ")); //join flattens an array of strings into 
-
-console.log(mack.pop()); //pop again
-
-console.log(mack);
+//{key: value}; series of keys and values we can assign to and read from
+//anything that's a valid variable name, you can leave the quotes off the key
+//dot notation vs. square bracket notation
 
 
+//justin.lastName = "Dan"; //DOT NOTATION also works for setting
+//justin.lastName //DOT NOTATION returns the value assigned to the key lastName within the object justin
+
+//justin["favorite color"] = "green" //SQUARE BRACKET NOTATION is used with keys that have spaces
+//justin["favorite color"]; //SQUARE BRACKET NOTATION
+
+//A Method is a function that is a property of an object
+
+var genericGreet = function() {
+	return "Hello I am " + this.firstName + " " + this.lastName;
+}
+
+var justin = {
+	firstName: "Justin",
+	lastName: "Thareja",
+	skills: ["surfing", "snowboarding", "Javascript"],
+	"favorite color": "blue",
+	greet: genericGreet
+};
+
+var coggers = {
+	firstName: "Katie",
+	lastName: "Johnston",
+	skills: ["active listening", "crisis management", "qualitative research"],
+	favoriteColor: "purple",
+	greet: genericGreet
+};
+
+
+//explanation in english
+//created coggers as an object with certain properties
+//each property within the coggers object has a specific key: value pair
+//each value is recognized by calling (right term?) the associated key
+//if a value within an object is a function, its known as a method
+//the greet method will call the genericGreet function which returns a string including values this.firstName and this.lastName
+//since 'this' is defined right before the method, in this case 'this' = coggers
+//so the coggers.greet() will return "Hello I am Katie Johnston"
+
+   var genericGreet = function(name, mood) {
+        name = name || "you";
+        mood = mood || "good";
+        return "Hello " + name + ", my name is " + this.name +
+          " and I am in a " + mood + " mood!";
+      }
+      
+      var andrew = {
+        name: "Andrew"
+      }
+      
+      var args1 = ["Michael", "awesome", ":)"];
+
+      var greeting = genericGreet;
 
 
 
 
+var arrayEmpty = [];
+var arrayContents = ["A", "B", "C", "D", "E"];
+
+for (var i = 0; i < 5; i++)
+	arrayEmpty.push(arrayContents[i]);
+
+var myString = arrayEmpty.join("");
 
 
 
