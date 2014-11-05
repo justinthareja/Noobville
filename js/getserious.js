@@ -1,3 +1,8 @@
+/***********************************************************************************************************
+EJS CH. 4 Walkthrough
+***********************************************************************************************************/
+
+
 var journal = [
   {"events":["carrot","exercise","weekend"],"squirrel":false},
   {"events":["bread","pudding","brushed teeth","weekend","touched tree"],"squirrel":false},
@@ -139,12 +144,73 @@ function gatherCorrelations(journal) {
 var correlations = gatherCorrelations(journal);
 
 
-//filter out insignificant correlations
+
 for (var event in correlations) {
 	var correlation = correlations[event];
 	if (correlation > 0.1 || correlation < -0.1)
-		console.log(event + ": " + correlation);
+		console.log(event + ": " + correlation); //filter out insignificant correlations
 }
+
+/* Array Methods */
+var todoList = [];
+function rememberTo(task) {
+  todoList.push(task);
+}
+function whatIsNext() {
+  return todoList.shift();
+}
+function urgentlyRememberTo(task) {
+  todoList.unshift(task);
+}
+
+function remove(array, index) {
+  console.log(arguments); //arguments is a special variable that stores all arguments that were used when the function is called
+  return array.slice(0, index)
+    .concat(array.slice(index + 1));
+}
+
+/***********************************************************************************************************
+EJS CH. 4 Exercises
+***********************************************************************************************************/
+
+/* Write a range function that takes two arguments, start and end, 
+and returns an array containing all the numbers from start up to (and including) end. */
+
+
+
+function range(start, end){ //declare an function that takes two arguments "start" and "end"
+	var startToEnd = [] //define an empty array
+	for (i = start; i <= end; i++) //loop from "start" to "end", with increments of 1
+		startToEnd.push(i); //inside the loop, push the current index to the array
+	return startToEnd; //return the array after loop
+}
+
+/* Next, write a sum function that takes an array of numbers and returns the sum of these numbers. 
+Run the previous program and see whether it does indeed return 55. */
+
+function sum(array){ //declare a function that takes an array
+	var sum = 0 //define a variable "sum" to keep track of the sum
+	for (i = 0; i < array.length; i++) //loop through the whole array using array.length
+		sum += array[i]; //add each value to sum
+	return sum; //return sum 
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
