@@ -151,7 +151,7 @@ for (var event in correlations) {
 		console.log(event + ": " + correlation); //filter out insignificant correlations
 }
 
-/* Array Methods */
+ // Array Methods 
 var todoList = [];
 function rememberTo(task) {
   todoList.push(task);
@@ -173,20 +173,33 @@ function remove(array, index) {
 EJS CH. 4 Exercises
 ***********************************************************************************************************/
 
-/* Write a range function that takes two arguments, start and end, 
-and returns an array containing all the numbers from start up to (and including) end. */
+// Write a range function that takes two arguments, start and end, 
+// and returns an array containing all the numbers from start up to (and including) end. 
+// As a bonus assignment, modify your range function to take an optional third argument that indicates 
+// the “step” value used to build up the array. If no step is given, the array elements go up by 
+// increments of one, corresponding to the old behavior.
 
-
-
-function range(start, end){ //declare an function that takes two arguments "start" and "end"
+function range(start, end, step){ //declare a function that takes two arguments "start" and "end"
 	var startToEnd = [] //define an empty array
-	for (i = start; i <= end; i++) //loop from "start" to "end", with increments of 1
-		startToEnd.push(i); //inside the loop, push the current index to the array
+	if (arguments.length < 3) 
+		step = 1;
+
+	if (step > 0) {
+		for (i = start; i <= end; i += step) //loop from "start" to "end", with increments of step
+			startToEnd.push(i); //inside the loop, push the current index to the array
+	}
+	else {
+		for (i = start; i >= end; i += step)
+			startToEnd.push(i);	
+	}
+
 	return startToEnd; //return the array after loop
 }
 
-/* Next, write a sum function that takes an array of numbers and returns the sum of these numbers. 
-Run the previous program and see whether it does indeed return 55. */
+
+
+// Next, write a sum function that takes an array of numbers and returns the sum of these numbers. 
+// Run the previous program and see whether it does indeed return 55. 
 
 function sum(array){ //declare a function that takes an array
 	var sum = 0 //define a variable "sum" to keep track of the sum
@@ -194,6 +207,46 @@ function sum(array){ //declare a function that takes an array
 		sum += array[i]; //add each value to sum
 	return sum; //return sum 
 }
+
+
+
+// For this exercise, write two functions, reverseArray and reverseArrayInPlace. The first, reverseArray, 
+// takes an array as argument and produces a new array that has the same elements in the inverse order. 
+// The second, reverseArrayInPlace, does what the reverse method does: it modifies the array given as the
+// argument in order to reverse its elements. Neither may use the standard reverse method.
+
+function reverseArray(array) {
+	newArray = [];
+	for (i = 0; i < array.length; i++) 
+		newArray.unshift(array[i]);
+	return newArray;
+}
+
+function reverseArrayInPlace(array) {
+	for (i = 0; i < Math.floor(array.length/2); i++){
+		var x = array[array.length - (i+1)];
+		array[array.length - (i+1)] = array[i];
+		array[i] = x;
+	}
+	return array;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
