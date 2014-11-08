@@ -249,10 +249,7 @@ var list = {
 };
 
 function prepend(element, list) {
-  var newList = {};
-  newList['value'] = element;
-  newList['rest'] = list;
-  return newList;
+  return {value: element, rest: list};
 }
 
 function nth(list, index) {
@@ -289,6 +286,59 @@ function listToArray(list) {
 // To find out whether to compare two things by identity (use the === operator for that) or by looking at their properties, 
 // you can use the typeof operator. If it produces "object" for both values, you should do a deep comparison. But you have 
 // to take one silly exception into account: by a historical accident, typeof null also produces "object".
+
+
+
+function deepEqual(x, y) {
+
+  var numPropertiesInX = 0, numPropertiesInY = 0;
+
+  if(typeof x == "object" && x != null && 
+     typeof y == "object" && y != null) {
+  
+    for (var key in x) 
+      numPropertiesInX++;
+    for (var key in y) 
+      numPropertiesInY++;
+
+    if (numPropertiesInX === numPropertiesInY) {
+      for (var key in x) {
+        if (y[key]) 
+          return deepEqual(x[key], y[key]);
+        else 
+          return false;
+      } 
+    }
+    else 
+      return false;
+  }
+  else 
+    return x === y;
+}
+
+// BOOK SOLUTION
+function deepEqual(a, b) {
+  if (a === b) return true;
+  
+  if (a == null || typeof a != "object" ||
+      b == null || typeof b != "object")
+    return false;
+  
+  var propsInA = 0, propsInB = 0;
+
+  for (var prop in a)
+    propsInA += 1;
+
+  for (var prop in b) {
+    propsInB += 1;
+    if (!(prop in a) || !deepEqual(a[prop], b[prop]))
+      return false;
+  }
+  
+  return propsInA == propsInB;
+}
+
+
 
 
 
