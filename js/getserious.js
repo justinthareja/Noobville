@@ -145,11 +145,11 @@ var correlations = gatherCorrelations(journal);
 
 
 
-for (var event in correlations) {
-	var correlation = correlations[event];
-	if (correlation > 0.1 || correlation < -0.1)
-		console.log(event + ": " + correlation); //filter out insignificant correlations
-}
+// for (var event in correlations) {
+// 	var correlation = correlations[event];
+// 	if (correlation > 0.1 || correlation < -0.1)
+// 		console.log(event + ": " + correlation); //filter out insignificant correlations
+// }
 
  // Array Methods 
 var todoList = [];
@@ -316,27 +316,58 @@ function deepEqual(x, y) {
     return x === y;
 }
 
-// BOOK SOLUTION
-function deepEqual(a, b) {
-  if (a === b) return true;
+// // BOOK SOLUTION
+// function deepEqual(a, b) {
+//   if (a === b) return true;
   
-  if (a == null || typeof a != "object" ||
-      b == null || typeof b != "object")
-    return false;
-  
-  var propsInA = 0, propsInB = 0;
+//   if (a == null || typeof a != "object" ||
+//       b == null || typeof b != "object") 
+//     return false;
+//   // why does deepEqual(null,null) not return false if it meets the a == null condition?
 
-  for (var prop in a)
-    propsInA += 1;
+//   var propsInA = 0, propsInB = 0;
 
-  for (var prop in b) {
-    propsInB += 1;
-    if (!(prop in a) || !deepEqual(a[prop], b[prop]))
-      return false;
-  }
+//   for (var prop in a)
+//     propsInA += 1;
+
+//   for (var prop in b) {
+//     propsInB += 1;
+//     if (!(prop in a) || !deepEqual(a[prop], b[prop]))
+//       return false;
+//   }
   
-  return propsInA == propsInB;
+//   return propsInA == propsInB;
+// }
+
+
+
+/***********************************************************************************************************
+Coderbyte Practice Exercises
+***********************************************************************************************************/
+
+ function firstReverse(str) {
+  var newString = "";
+  for (i = str.length - 1; i >= 0; i--)
+    newString += str[i];
+  return newString;
+ }
+
+// Using the JavaScript language, have the function firstFactorial take the num parameter being passed and 
+// return the factorial of it (ie. if num = 4, return (4 * 3 * 2 * 1)). 
+
+function firstFactorial(num) {
+  var x = num;
+  for (i = num - 1; i > 1; i--) 
+    x *= i;
+  return x;
 }
+
+
+
+
+
+
+
 
 
 
