@@ -128,18 +128,30 @@ function tableFor(event, journal) {
 }
 
 
+// function gatherCorrelations(journal) {
+//   var phis = {}; //define empty object map
+//   for (var entry = 0; entry < journal.length; entry++) { //loops over all journal entries
+//     var events = journal[entry].events; //create new variable "events" to extract just the array of events within the journal entry. (excludes the squirrel property) 
+//     for (var i = 0; i < events.length; i++) { //loops through all the elements within the events array (all activities within one single day's entry)
+//       var event = events[i]; //create a new variable and stores the element at the current index of the loop
+//       if (!(event in phis)) //checks for duplicates by using the in operator
+//         phis[event] = phi(tableFor(event, journal)); //adds the event as the key and phi as the value into the phis object map
+//     }
+//   }
+//   return phis;
+// }
+
 function gatherCorrelations(journal) {
-  var phis = {}; //define empty object map
-  for (var entry = 0; entry < journal.length; entry++) { //loops over all journal entries
-    var events = journal[entry].events; //create new variable "events" to extract just the array of events within the journal entry. (excludes the squirrel property) 
-    for (var i = 0; i < events.length; i++) { //loops through all the elements within the events array (all activities within one single day's entry)
-      var event = events[i]; //create a new variable and stores the element at the current index of the loop
-      if (!(event in phis)) //checks for duplicates by using the in operator
-        phis[event] = phi(tableFor(event, journal)); //adds the event as the key and phi as the value into the phis object map
-    }
-  }
+  var phis = {}; //define empty object
+  journal.forEach(function(entry) {
+    entry.events.forEach(function(event) {
+      if (!(event in phis))
+        phis[event] = phi(tableFor(event, journal));
+    });
+  });
   return phis;
 }
+
 
 var correlations = gatherCorrelations(journal);
 
@@ -362,10 +374,108 @@ function firstFactorial(num) {
   return x;
 }
 
+var array = [1,2,3,4];
+var obj = {1:"value = 1", 2:"value = 2", 3:"value = 3", 4:"value = 4"};
+
+
+for (i=0; i < array.length; i++){
+  if (array[i] === 3) {
+  }
+}
+  
 
 
 
+/***********************************************************************************************************
+Treehouse Prototype Intro
+***********************************************************************************************************/
 
+var personPrototype = {
+  name: 'Anonymous',
+  greet: function (name, mood) {
+      //ensure a valid response if no arguments are given
+      name = name || 'You'; 
+      mood = mood || 'Good';
+
+      console.log('Hello, ' + name +
+                  ' I am ' + this.name +
+                  ' and I am in a ' + mood + ' mood!');
+  },
+
+  species: 'Homo Sapien'
+};
+
+function Person (name) {
+  this.name = name;
+}
+
+Person.prototype = personPrototype;
+
+justin = new Person('Justin');
+
+
+var carPrototype = {
+  model: "generic",
+  currentGear: 0,
+  increaseGear: function() {
+    this.currentGear ++;
+  },
+  decreaseGear: function() {
+    this.currentGear--;
+  } 
+}
+
+function Car(model) {
+  this.model = model;
+}
+
+Car.prototype = carPrototype; //a function's prototype is just an object
+
+
+
+/***********************************************************************************************************
+EJS Ch. 5
+***********************************************************************************************************/
+
+
+function gatherCorrelations(journal) {
+  var phis = {}; //define empty object map
+  for (var entry = 0; entry < journal.length; entry++) { //loops over all journal entries
+    var events = journal[entry].events; //create new variable "events" to extract just the array of events within the journal entry. (excludes the squirrel property) 
+    for (var i = 0; i < events.length; i++) { //loops through all the elements within the events array (all activities within one single day's entry)
+      var event = events[i]; //create a new variable and stores the element at the current index of the loop
+      if (!(event in phis)) //checks for duplicates by using the in operator
+        phis[event] = phi(tableFor(event, journal)); //adds the event as the key and phi as the value into the phis object map
+    }
+  }
+  return phis;
+}
+
+function gatherCorrelations(journal) {
+  var phis = {}; 
+  journal.forEach(function(entry) {
+    entry.events.forEach(function(event) {
+      if (!(event in phis))
+        phis[event] = phi(tableFor(event, journal));
+    });
+  });
+  return phis;
+}
+
+function greaterThan(n) {
+  return function(m) { 
+    return m > n; 
+  };
+}
+
+function noisy(f) {
+  return function(arg) {
+    console.log("calling with", arg);
+    var val = f(arg);
+    console.log("called with", arg, "- got", val);
+    return val;
+  };
+}
 
 
 
