@@ -1,5 +1,5 @@
 /***********************************************************************************************************
-EJS CH. 4 Walkthrough
+EJS CH. 4 
 ***********************************************************************************************************/
 
 
@@ -213,12 +213,12 @@ function range(start, end, step){ //declare a function that takes two arguments 
 // Next, write a sum function that takes an array of numbers and returns the sum of these numbers. 
 // Run the previous program and see whether it does indeed return 55. 
 
-function sum(array){ //declare a function that takes an array
-	var sum = 0 //define a variable "sum" to keep track of the sum
-	for (i = 0; i < array.length; i++) //loop through the whole array using array.length
-		sum += array[i]; //add each value to sum
-	return sum; //return sum 
-}
+// function sum(array){ //declare a function that takes an array
+// 	var sum = 0 //define a variable "sum" to keep track of the sum
+// 	for (i = 0; i < array.length; i++) //loop through the whole array using array.length
+// 		sum += array[i]; //add each value to sum
+// 	return sum; //return sum 
+// }
 
 
 
@@ -437,37 +437,58 @@ Car.prototype = carPrototype; //a function's prototype is just an object
 EJS Ch. 5
 ***********************************************************************************************************/
 
+var array = [1, 2, 3];
 
-function gatherCorrelations(journal) {
-  var phis = {}; //define empty object map
-  for (var entry = 0; entry < journal.length; entry++) { //loops over all journal entries
-    var events = journal[entry].events; //create new variable "events" to extract just the array of events within the journal entry. (excludes the squirrel property) 
-    for (var i = 0; i < events.length; i++) { //loops through all the elements within the events array (all activities within one single day's entry)
-      var event = events[i]; //create a new variable and stores the element at the current index of the loop
-      if (!(event in phis)) //checks for duplicates by using the in operator
-        phis[event] = phi(tableFor(event, journal)); //adds the event as the key and phi as the value into the phis object map
-    }
+// for (var i = 0; i < array.length; i++) {
+//   console.log(array[i]);
+// }
+
+array.forEach(function (element) {
+  console.log(element);
+});
+
+// refactor using forEach
+
+
+
+// function gatherCorrelations(journal) {
+//   var phis = {}; //define empty object map
+//   for (var entry = 0; entry < journal.length; entry++) { //loops over all journal entries
+//     var events = journal[entry].events; //create new variable "events" to extract just the array of events within the journal entry. (excludes the squirrel property) 
+//     for (var i = 0; i < events.length; i++) { //loops through all the elements within the events array (all activities within one single day's entry)
+//       var event = events[i]; //create a new variable and stores the element at the current index of the loop
+//       if (!(event in phis)) //checks for duplicates by using the in operator
+//         phis[event] = phi(tableFor(event, journal)); //adds the event as the key and phi as the value into the phis object map
+//     }
+//   }
+//   return phis;
+// }
+
+// refactor using forEach
+
+
+function gatherCorrelations (journal) {
+  var phis = {};
+  journal.forEach(function (entry) {
+    entry.events.forEach(function (event) {
+      if (!(event in phis)) { 
+        phis[event] = phi(tableFor(event, journal)); 
+      }
+    })
+  })
+  return phis;
+}
+    
+
+// function that creates a new function
+function greaterThan(a) {
+  return function(b) {
+    return b > a;
   }
-  return phis;
 }
 
-function gatherCorrelations(journal) {
-  var phis = {}; 
-  journal.forEach(function(entry) {
-    entry.events.forEach(function(event) {
-      if (!(event in phis))
-        phis[event] = phi(tableFor(event, journal));
-    });
-  });
-  return phis;
-}
 
-function greaterThan(n) {
-  return function(m) { 
-    return m > n; 
-  };
-}
-
+// function that changes other functions
 function noisy(f) {
   return function(arg) {
     console.log("calling with", arg);
@@ -478,8 +499,51 @@ function noisy(f) {
 }
 
 
+// function that provides new type of control flow
+
+function unless(test, then) {
+  if (!test) {
+    then();
+  }
+}
+function repeat(times, body) {
+  for (var i = 0; i < times; i++) { 
+    body(i);   
+  }
+}
 
 
+// repeat(13, function(n) {
+//   unless(n % 2, function() {
+//     console.log(n, "is even");
+//   });
+// });
+
+
+// one iteration of body looks like this:
+
+// body(0) {
+//   unless(0 % 2, function (){
+//     console.log(n, "is even");
+//   })
+// }
+
+// within this iteration, unless looks like this:
+
+// if !(0 % 2) // true if n is an even number -- double negative
+//   function () {
+//     console.log(0, "is even") 
+//   }
+
+var sum = 0;
+
+repeat(11, function (num) {
+  unless (num <= 10, function () {
+    sum += num;
+  })
+})
+
+console.log(sum);
 
 
 
