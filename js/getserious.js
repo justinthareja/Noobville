@@ -507,18 +507,18 @@ function unless(test, then) {
 	then();
   }
 }
+
 function repeat(times, body) {
   for (var i = 0; i < times; i++) { 
 	body(i);   
   }
 }
 
-
-// repeat(13, function(n) {
-//   unless(n % 2, function() {
-//     console.log(n, "is even");
-//   });
-// });
+repeat(13, function(n) {
+  unless(n % 2, function() {
+    console.log(n, "is even");
+  });
+});
 
 
 // one iteration of body looks like this:
@@ -632,10 +632,135 @@ var avgFemaleAge = average(ancestry.filter(female).map(age));
 console.log(avgMaleAge);
 console.log(avgFemaleAge);
 
-var byName = {};
+var byName = {}; 
 ancestry.forEach(function (person) {
-	byName[person.name] = person;
+	byName[person.name] = person; 
 })
+
+
+function reduceAncestors(person, f, defaultValue) {
+  function valueFor(person) {
+    if (person == undefined) {
+      //console.log('valueFor called with person == undefined');	
+      return defaultValue;
+    }
+    else {
+      //console.log('valueFor called with person ', person.name);
+      return f(person, valueFor(byName[person.mother]),
+                       valueFor(byName[person.father]));	
+    }
+  }
+  return valueFor(person);
+}
+
+function sharedDNA(person, fromMother, fromFather) {
+  if (person.name == "Pauwels van Haverbeke") {
+  	//console.log('sharedDNA returns: ', 1)
+    return 1;	
+  }
+  else {
+  	//console.log('sharedDNA returns: ', (fromMother + fromFather) / 2);
+    return (fromMother + fromFather) / 2;
+  }
+  	
+}
+
+
+var ph = byName['Philibert Haverbeke']; 
+
+reduceAncestors(ph, sharedDNA, 0); 
+
+
+function countAncestors(person, test) {
+  function combine(person, fromMother, fromFather) {
+    var thisOneCounts = test(person);
+    return fromMother + fromFather + (thisOneCounts ? 1 : 0);
+  }
+  return reduceAncestors(person, combine, 0);
+}
+
+function longLivingPercentage(person) {
+  var all = countAncestors(person, function(person) {
+    return true;
+  });
+  var longLiving = countAncestors(person, function(person) {
+    return (person.died - person.born) >= 70;
+  });
+  return longLiving / all;
+}
+
+
+//percentage of known ancestors of Emile Haverbeke who lived past 70
+longLivingPercentage(byName["Emile Haverbeke"])
+
+
+var theSet = ["Carel Haverbeke", "Maria van Brussel",
+              "Donald Duck"];
+
+//a function that compares a specific person to a set of people, and returns true if the person exists within the set
+function isInSet (set, person) {
+	return set.indexOf(person.name) > -1;
+}
+
+//filters the ancestry array for any names in theSet by reusing the isInSet function
+ancestry.filter(function(person) {
+  return isInSet(theSet, person);
+});
+
+//intro to bind function
+ancestry.filter(isInSet.bind(null, theSet))
+
+
+
+/***********************************************************************************************************
+EJS Ch. 5 Exercises
+***********************************************************************************************************/
+
+// Flattening
+
+// Use the reduce method in combination with the concat method to “flatten” an array of arrays into a single 
+// array that has all the elements of the input arrays.
+
+var a = [[1,2,3],
+		 [4,5,6],
+		 [7,8,9]]
+
+a.reduce(function (previousValue, currentValue) {
+	return previousValue.concat(currentValue);
+})
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
