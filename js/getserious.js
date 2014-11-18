@@ -514,11 +514,11 @@ function repeat(times, body) {
   }
 }
 
-repeat(13, function(n) {
-  unless(n % 2, function() {
-    console.log(n, "is even");
-  });
-});
+// repeat(13, function(n) {
+//   unless(n % 2, function() {
+//     console.log(n, "is even");
+//   });
+// });
 
 
 // one iteration of body looks like this:
@@ -608,12 +608,11 @@ var oldestKnown = ancestry.reduce(function (min, cur) {
 	return cur.born < min.born ? cur : min;
 })
 
-
-function average (array) {
-	function plus (a, b) {
-		return a + b;
-	}
-	return array.reduce(plus) / array.length
+function average(array) {
+  function plus (a, b) {
+    return a + b;
+  }
+  return array.reduce(plus) / array.length;
 }
 
 function age(p) { return p.died - p.born; }
@@ -629,8 +628,8 @@ function female(p) { return p.sex === 'f';}
 var avgMaleAge = average(ancestry.filter(male).map(age));
 var avgFemaleAge = average(ancestry.filter(female).map(age));
 
-console.log(avgMaleAge);
-console.log(avgFemaleAge);
+// console.log(avgMaleAge);
+// console.log(avgFemaleAge);
 
 var byName = {}; 
 ancestry.forEach(function (person) {
@@ -711,13 +710,14 @@ ancestry.filter(function(person) {
 ancestry.filter(isInSet.bind(null, theSet))
 
 
-
+function isPalindrome (str) {
+  return str.toLowerCase().replace(/\s+/g, '').split("").reverse().join("") === str.toLowerCase().replace(/\s+/g, '');
+}
 /***********************************************************************************************************
 EJS Ch. 5 Exercises
 ***********************************************************************************************************/
 
-// Flattening
-
+// PROMPT 1:
 // Use the reduce method in combination with the concat method to “flatten” an array of arrays into a single 
 // array that has all the elements of the input arrays.
 
@@ -729,23 +729,120 @@ a.reduce(function (previousValue, currentValue) {
 	return previousValue.concat(currentValue);
 })
 
+// PROMPT 2:
+// Using the example data set from this chapter, compute the average age difference between mothers and children 
+// (the age of the mother when the child is born). You can use the average function defined earlier in this chapter.
+// Note that not all the mothers mentioned in the data are themselves present in the array. The byName object, which
+// makes it easy to find a person’s object from their name, might be useful here.
+
+// the input into average must be a single array with all age differences between mothers and children
+// ancestry is an array with each object representing a person
+
+// how to find the age difference between a person and his mother
+
+ancestry[0] // person 
+ancestry[0].mother // person's mother's name
+byName[ancestry[0].mother] // person's mother's 
+ancestry[0].born-byName[ancestry[0].mother].born // age of the mother when the child was born --> abstract this into a function
+
+
+function motherAgeAtBirth (person) {
+  if (byName[person.mother] === undefined) {
+    return;
+  }
+  else {
+    return person.born - byName[person.mother].born;  
+  } 
+}
+// q for dan, why does the example not run into the undefined issue, but i can't get away with it in my named function?
+
+ancestry.map(motherAgeAtBirth) // returns an array with all age differences between mothers and children, includes many undefined values
+
+//need to filter out undefined values. create a function that filters the ancestry list before passing through the map.
+
+function hasKnownMother (person) {
+  return ancestry.filter(function (person) {
+    return byName[person.mother];
+  })
+}
+
+var differences = hasKnownMother(ancestry).map(motherAgeAtBirth);
+
+console.log('The average age difference between mothers and children is',
+  average(differences));
 
 
 
+// PROMPT 3:
+// Compute and output the average age of the people in the ancestry data set per century. A person is assigned to a century by taking 
+// their year of death, dividing it by 100, and rounding it up, as in Math.ceil(person.died / 100).
 
 
+// create a function that filters the ancestry to people who lived within the given century. 
 
 
+// function centuryMap (century) {
+//   return ancestry.filter(function (person) {
+//     return Math.ceil(person.died / 100) === century;
+//   })
+// }
+
+// expand the function to map the filtered ancestry to generate an array of ages
 
 
+function inCentury (century) {
+  function centuryMap () {
+    return ancestry.filter(function (person) {
+      return Math.ceil(person.died / 100) === century;
+    })
+  }
+  return centuryMap(century).map(age);
+}
+
+// run average for each century + store in obj
+
+var avgAgePerCentury = {
+}
+
+for (i = 16; i <= 21; i++) {
+  avgAgePerCentury[i] = Math.round(average(inCentury(i)) * 10) / 10;
+}
+
+// For bonus points, write a function groupBy that abstracts the grouping operation. It should accept as arguments
+// an array and a function that computes the group for an element in the array and returns an object that maps group 
+// names to arrays of group members.
 
 
+// The essence of this example lies in grouping the elements of a collection by some aspect of theirs—splitting the array of ancestors into 
+// smaller arrays with the ancestors for each century. During the grouping process, keep an object that associates century names (numbers) 
+// with arrays of either person objects or ages. Since we do not know in advance what categories we will find, we’ll have to create them on 
+// the fly. For each person, after computing their century, we test whether that century was already known. If not, add an array for it. 
+// Then add the person (or age) to the array for the proper century.
+// Finally, a for/in loop can be used to print the average ages for the individual centuries.
 
 
+function groupBy (array, func) {
+  var result = {};
 
+  array.forEach(function (person) {
+    var group = func(person) 
 
+    if(!result[group]) {
+      result[group] = [];
+    }
 
+    result[group].push(person);
+  })
+  return result;  
+}
 
+function getCentury (person) {
+  return Math.ceil(person.died / 100);
+}
+
+function getSex (person) {
+  return person.sex;
+}
 
 
 
