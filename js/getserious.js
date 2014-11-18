@@ -800,6 +800,7 @@ function inCentury (century) {
 }
 
 // run average for each century + store in obj
+// (not a very good way of doing it)
 
 var avgAgePerCentury = {
 }
@@ -808,49 +809,117 @@ for (i = 16; i <= 21; i++) {
   avgAgePerCentury[i] = Math.round(average(inCentury(i)) * 10) / 10;
 }
 
+
+
 // For bonus points, write a function groupBy that abstracts the grouping operation. It should accept as arguments
 // an array and a function that computes the group for an element in the array and returns an object that maps group 
 // names to arrays of group members.
 
 
-// The essence of this example lies in grouping the elements of a collection by some aspect of theirs—splitting the array of ancestors into 
-// smaller arrays with the ancestors for each century. During the grouping process, keep an object that associates century names (numbers) 
-// with arrays of either person objects or ages. Since we do not know in advance what categories we will find, we’ll have to create them on 
-// the fly. For each person, after computing their century, we test whether that century was already known. If not, add an array for it. 
-// Then add the person (or age) to the array for the proper century.
-// Finally, a for/in loop can be used to print the average ages for the individual centuries.
-
-
 function groupBy (array, func) {
-  var result = {};
+  var result = {};  
 
   array.forEach(function (person) {
-    var group = func(person) 
+    var group = func(person) // with this abstraction, the fuction is what determines the types of groups. 
 
     if(!result[group]) {
-      result[group] = [];
+      result[group] = []; // checks to see if there's an array for that group, and if not adds a blank array to the result obj
     }
-
-    result[group].push(person);
+    result[group].push(person); // pushes the person to their respective group's array
   })
+
   return result;  
 }
 
 function getCentury (person) {
-  return Math.ceil(person.died / 100);
+  return Math.ceil(person.died / 100); // returns the century of each person.
 }
 
 function getSex (person) {
-  return person.sex;
+  return person.sex; // returns the sex of each person
+}
+
+// now need to calculate average age on each century
+// average takes an array of numbers. need to map the byCentury values to an array of ages.
+
+var byCentury = groupBy(ancestry, getCentury);
+
+for (key in byCentury) {
+  byCentury[key] = average(byCentury[key].map(age))
+}
+
+console.log(byCentury); // cha-CHING!!!!!!!!!!!!
+
+
+// Summary of this exercise in english:
+
+// We wanted to calculate the average age of people per century using a data set of ancestors stored in JSON format. The first
+// step was to convert the JSON data set into javascript by using JSON.parse and storing it into an 'ancestry' variable. The parse returned an array
+// of objects, with each object representing an individual person (ancestor). Each ancestor had the following characterisitics stored in their
+// respective object: born, died, father, mother, name, sex. 
+
+// 'ancestry' stored all the people (objects) in no particular order, and to calculate the average age of people per century, we first
+// wanted to group all the people (objects) by their century. To do this, we abstracted the grouping process into the function groupBy, which took 
+// an array and a function as an argument and returned a new object that maps group names to an array of group members. 
+
+// The function passed through groupBy determines the behavior on which to group the array passed through groupBy. To group all ancestors by century, the
+// getCentury function was created to act as an argument for groupBy. 
+
+// With those three pieces of the puzzle, groupBy(ancestry, getCentury); creates a new object with each ancestor grouped by their century. 
+
+// Technically, the data set started out as an array of objects ('people'), then grouped into a new object with the key representing the 
+// group "name" and the value representing an array of objects ('people') who belonged to the group. A for/in loop was run over this new object to
+// find the average of each group, by re-assigning the value of each group (century) to the average of an array of the ages of all members within the group.
+
+
+
+// PROMPT 4:
+
+// Arrays also come with the standard methods every and some. Both take a predicate function that, when called with an array element as argument, returns true 
+// or false. Just like && returns a true value only when the expressions on both sides are true, every returns true only when the predicate returns true for 
+// all elements of the array. Similarly, some returns true as soon as the predicate returns true for any of the elements. They do not process more elements 
+// than necessary—for example, if some finds that the predicate holds for the first element of the array, it will not look at the values after that.
+
+// Write two functions, every and some, that behave like these methods, except that they take the array as their first argument rather than being a method.
+
+
+// define every to take two arguments, an array and a test.
+// every will return a Boolean value of true if each element in the array matches the test, or false if just 1 element fails.
+
+function every (array, test) {
+// create a new array to store test results
+  var results = [];
+// pass the test through a foreach loop on the array, pushing each result to the test results array
+  array.forEach(function (element) {
+    results.push(test(element));
+  })
+  console.log('results =', results);
+  return results.indexOf(false) == -1;
+// scan the array using indexOf, to search for a false value
+
+// return results.indexOf(false) == -1
 }
 
 
+// define some to take two arguments, an array and a test.
+// some will assume the same behavior of every, but return results.indexOf(true) > -1
 
+function some (array, test) {
+  var results = [];
 
+  array.forEach(function (element) {
+    results.push(test(element));
+  })
+  
+  console.log('results =', results);
+  return results.indexOf(true) > -1;
+}
 
-
-
-
+//tests
+console.log(every([NaN, NaN, NaN], isNaN));
+console.log(every([NaN, NaN, 4], isNaN));
+console.log(some([NaN, 3, 4], isNaN));
+console.log(some([2, 3, 4], isNaN));
 
 
 
