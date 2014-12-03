@@ -1,3 +1,6 @@
+var score = 0;
+var message;
+
 function randomColorGenerator () {
 	var r = Math.floor(Math.random() * 255),
 		g = Math.floor(Math.random() * 255),
@@ -7,6 +10,7 @@ function randomColorGenerator () {
 }
 
 function generateBoard (height, width) {
+
 	var numRows = Math.floor(height / 90);
 	var molesPerRow = Math.floor(width / 90);
 
@@ -41,22 +45,39 @@ function generateBoard (height, width) {
 	}
 }
 
+function generateMoles(duration, numMoles) {
+
+	for (i = 0; i < numMoles; i++) {
+
+		var moleIndex = Math.floor(Math.random() * $('.mole').length);
+		var mole = $('.mole')[moleIndex];
+		
+		$(mole).fadeTo(duration/2, 1, function () {
+		  $(this).one("click", function () {
+		  	if ($(this).css('opacity') > 0) {
+		  		score++;
+		  		message = "Moles Whacked: " + score;
+		  		$('#score').text(message);
+		  	}
+		  })
+		});		
+
+		$(mole).fadeTo(duration, 0);		
+	}
+}
+
 generateBoard($(window).height(), $(window).width());
 
 $('#scoreboard').css("backgroundColor", randomColorGenerator);
 $('#scoreboard').css("color", randomColorGenerator);
 $('#field').css("backgroundColor", randomColorGenerator);
 
+// $(document).mousemove(function(e){
+//     $("#mallet").css({left:e.pageX, top:e.pageY});
+// });
 
-// generate a scoreboard 
+var intervalID = window.setInterval(generateMoles, 2000, 1000, 2)
 
-
-
-
-
-// the moles need to be invisible upon generation
-// random moles appear over a given intervals
-// on click the moles disappear and the score goes up
 
 
 
