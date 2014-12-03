@@ -1,5 +1,17 @@
+/************************************************************************
+INDEX HEADER
+************************************************************************/
+
 img {
 	max-width: 100%;
+}
+
+a {
+	text-decoration: none;
+}
+
+ul {
+	margin: 0;
 }
 
 #gallery {
@@ -14,13 +26,11 @@ img {
 	text-align: center;
 	font-size: 40px;
 }
-a {
-	text-decoration: none;
-}
+
 #wrapper {
 	background: orange;
-	max-width: 940px;
-	padding: 0 5%;
+	/* max-width: 940px; */
+	padding: 5%;
 	margin: 0 auto;
 }
 li {
@@ -70,7 +80,7 @@ nav a.selected {
 
 p {
 	font-weight: bolder;
-	line-height: .2em;
+	line-height: 1.2em;
 }
 
 .social-icon {

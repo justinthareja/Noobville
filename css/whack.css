@@ -1,0 +1,32 @@
+/************************************************************************
+SCOREBOARD
+************************************************************************/
+
+#scoreboard {
+	width: auto;
+	height: 80px;
+	background-color: darkgrey;
+	line-height: 5em;
+}
+
+h1 {
+	margin: 0;
+	display: flex;
+	justify-content: center;
+}
+
+/************************************************************************
+FIELD
+************************************************************************/
+/* sets default values for the field */
+
+#field {
+	width: 1280px;
+	height: 600px;
+}
+
+.mole {
+	height: 60px;
+	width: 80px;
+	padding: 5px;
+}
